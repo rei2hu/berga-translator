@@ -6,7 +6,7 @@ browser.contextMenus.create({
 
 // TODO: what doesn't have to be a string?
 const modelConfig = {
-	"beam-sze": "1",
+	"beam-size": "1",
 	"normalize": "1.0",
 	"word-penalty": "0",
 	"max-length-break": "128",
