@@ -1,0 +1,24 @@
+{
+	"languages": {
+		"es": "Spanish",
+		"en": "English",
+		"fr": "French"
+	},
+	"models": {
+		"esen": {
+			"lex": "lex.50.50.esen.s2t.bin",
+			"model": "model.intgemm.alphas.bin",
+			"vocab": "vocab.esen.spm"
+		},
+		"fren": {
+			"lex": "lex.50.50.fren.s2t.bin",
+			"model": "model.fren.intgemm.alphas.bin",
+			"vocab": "vocab.fren.spm"
+		},
+		"enfr": {
+			"lex": "lex.50.50.enfr.s2t.bin",
+			"model": "model.enfr.intgemm.alphas.bin",
+			"vocab": "vocab.fren.spm"
+		}
+	}
+}

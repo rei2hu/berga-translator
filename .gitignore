@@ -1,0 +1,2 @@
+extension/translation/models/*
+!extension/translation/models/models.json
