@@ -21,10 +21,13 @@ const modelConfig = {
 	"alignment": "soft"
 };
 
+let settingsP = browser.storage.local.get();
+browser.storage.local.onChanged.addListener(changes => {
+	const newSettings = Object.entries(changes).map(([key, values]) => [key, values.newValue]);
+	settingsP = settingsP.then(settings => ({ ...settings, ...Object.fromEntries(newSettings)}));
+});
+
 const loadedModels = {};
-const modelsP =
-	fetch(browser.runtime.getURL("extension/translation/models/models.json"))
-		.then(res => res.json());
 const fastTextP =
 	fetch(browser.runtime.getURL("extension/detection/fasttext_wasm.wasm"))
 		.then(res => res.arrayBuffer())
@@ -43,21 +46,15 @@ const bergamotServiceP = bergamotP.then(module => new module.BlockingService({ c
 
 const getModel = async (from, to) => {
 	const bergamot = await bergamotP;
-	const { models } = await modelsP;
-	const id = `${from}${to}`;
+	const models = await settingsP; // models are keyed by id here (also has languages)
+	const id = `${from}-${to}`;
 
 	if (!(id in models)) return null;
 	if (id in loadedModels) return loadedModels[id];
 
-	// TODO: local file system access to submit directory of models to read from
-	// requires window.openDirectoryPicker() which is not supported by FF
-	// alternatively, make user modify models and somehow read extension's directory
-	const [model, shortList, ...vocabs] = await Promise.all([
-		`extension/translation/models/${id}/${models[id].model}`,
-		`extension/translation/models/${id}/${models[id].lex}`,
-		`extension/translation/models/${id}/${models[id].vocab}`,
-	]
-		.map(link => fetch(link).then(res => res.arrayBuffer())));
+	const model = models[id].model;
+	const shortList = models[id].lex;
+	const vocabs = models[id].vocabs;
 
 	const prepareAlignedMemoryFromBuffer = (buffer, alignmentSize) => {
 		var byteArray = new Int8Array(buffer);
@@ -122,6 +119,7 @@ const translate = async (message, from, to) => {
 
 // request translation via popup
 browser.runtime.onMessage.addListener(({ message, from, to }, info) => {
+	if (!message || !from || !to) return;
 	return translate(message, from, to);
 });
 

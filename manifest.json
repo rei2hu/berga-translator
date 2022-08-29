@@ -4,14 +4,15 @@
 	"author": "r",
 	"version": "0.1",
 	"description": "Client-sided text translator powered by The Bergamot Project",
-	"permissions": ["contextMenus", "activeTab"],
+	"permissions": ["contextMenus", "activeTab", "storage", "unlimitedStorage"],
 	"background": {
 		"persistent": true,
 		"scripts": [
 			"extension/detection/fasttext_wasm.js",
 			"extension/detection/fasttext.js",
 			"extension/translation/bergamot-translator-worker.js",
-			"extension/background.js"
+			"extension/background.js",
+			"extension/settings/settings-background.js"
 		]
 	},
 	"content_scripts": [{
@@ -20,5 +21,8 @@
 		"all_frames": true,
 		"run_at": "document_idle"
 	}],
+	"browser_action": {
+		"default_popup": "extension/settings/settings-view.html"
+	},
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }

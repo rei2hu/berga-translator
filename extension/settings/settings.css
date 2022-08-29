@@ -1,0 +1,13 @@
+body {
+	margin: 10px;
+}
+
+header {
+	margin-bottom: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		/* filter: invert(0.9) saturate(0) grayscale(0.5); */
+	}
+}

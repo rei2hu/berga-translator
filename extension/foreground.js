@@ -1,8 +1,9 @@
 (function setup() {
-	const modelsP =
-		fetch(browser.runtime.getURL("extension/translation/models/models.json"))
-			.then(res => res.json())
-			.then(res => res.languages);
+	let settingsP = browser.storage.local.get();
+	browser.storage.local.onChanged.addListener(changes => {
+		const newSettings = Object.entries(changes).map(([key, values]) => [key, values.newValue]);
+		settingsP = settingsP.then(settings => ({ ...settings, ...Object.fromEntries(newSettings)}));
+	});
 
 	const stylesheet = document.createElement("link");
 	stylesheet.type = "text/css";
@@ -13,13 +14,13 @@
 
 	browser.runtime.onMessage.addListener(({ type, data }) => {
 		(async () => {
-			const models = await modelsP;
-			const popup = createTranslationPopup(data, models);
+			const languages = (await settingsP).languages;
+			const popup = createTranslationPopup(data, languages);
 			document.body.appendChild(popup);
 		})();
 	});
 
-	function createTranslationPopup({ message, from, to }, models) {
+	function createTranslationPopup({ message, from, to }, languages) {
 		const selection = getSelection();
 		const originalText = selection.toString(); // assume highlighted stuff is still the same...
 		const rect = selection.getRangeAt(0).getBoundingClientRect(); // no multi selection
@@ -49,7 +50,7 @@
 		const closeButton = popup.querySelector(".berga-popup_close-button");
 		const loadingIcon = popup.querySelector(".berga-popup_loading-icon");
 
-		for (const [value, text] of Object.entries(models)) {
+		for (const [value, text] of Object.entries(languages)) {
 			for (const select of [fromSelect, toSelect]) {
 				const option = document.createElement("option");
 				option.value = value;
