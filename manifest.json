@@ -4,15 +4,19 @@
 	"author": "r",
 	"version": "0.1",
 	"description": "Client-sided text translator powered by The Bergamot Project",
+	"homepage_url": "https://github.com/rei2hu/berga-translator",
+	"icons": {
+		"16": "berga.png"
+	},
 	"permissions": ["contextMenus", "activeTab", "storage", "unlimitedStorage"],
 	"background": {
 		"persistent": true,
 		"scripts": [
+			"extension/background.js",
+			"extension/settings/settings-background.js",
 			"extension/detection/fasttext_wasm.js",
 			"extension/detection/fasttext.js",
-			"extension/translation/bergamot-translator-worker.js",
-			"extension/background.js",
-			"extension/settings/settings-background.js"
+			"extension/translation/bergamot-translator-worker.js"
 		]
 	},
 	"content_scripts": [{
@@ -22,7 +26,10 @@
 		"run_at": "document_idle"
 	}],
 	"browser_action": {
-		"default_popup": "extension/settings/settings-view.html"
+		"default_popup": "extension/settings/settings-view.html",
+		"default_icon": {
+			"16": "berga.png"
+		}
 	},
-	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none';"
 }
