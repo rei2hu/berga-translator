@@ -1,3 +1,4 @@
 extension/translation/models/*
 !extension/translation/models/models.json
 node_modules
+web-ext-artifacts
