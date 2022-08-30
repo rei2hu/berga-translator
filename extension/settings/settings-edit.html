@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Berga Translator Settings</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="settings.css"/>
+		<link rel="stylesheet" href="sakura.css" media="screen"/>
+		<link rel="stylesheet" href="sakura-dark.css" media="screen and (prefers-color-scheme: dark)" />
+	</head>
+	<body>
+		<div id="log"></div>
+		<header style="position: relative;">
+			<div><img style="margin: 0;" src="/berga.png"></img></div>
+			<div style="position: absolute; right: 0px; bottom: 0px;">
+				<button id="reset-settings">Reset Settings</button>
+			</div>
+		</header>
+		<hr>
+		<section>
+			<h6>Configure Languages:</h6>
+			<p>
+				Enter new languages you want to upload models for here. A language's identifier is a unique pair of letters
+				used to identify the language's models and the name is the name of the language.
+				<br><br>
+				The languages defined here determine what languages are present in the dropdowns.
+			</p>
+			<form id="add-language-form" action="">
+				<table>
+					<tr>
+						<th>Identifier</th>
+						<th>Name</th>
+						<th></th>
+					</tr>
+					<tbody id="added-languages"></tbody>
+					<tbody>
+						<tr>
+							<td><input id="language-id" maxlength="2" minlength="2" placeholder="id"></input></td>
+							<td><input id="language-name" placeholder="name"></input></td>
+							<td><button type="submit" id="add-language-button">Add</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</section>
+		<hr>
+		<section>
+			<h6>Upload New Models:</h6>
+			<p>
+				Upload new models here; download them from <a href="https://github.com/mozilla/firefox-translations-models">Firefox Translations Models</a>.
+				Each model should come with a model file, lex file, and one or more vocabulary files.
+				<br><br>
+				Translations can only be performed if there is a model from one language to the other.
+			</p>
+			<table>
+				<tr>
+					<th>Identifier</th>
+					<th>File</th>
+					<th>Size</th>
+					<th></th>
+				</tr>
+				<tbody id="added-models"></tbody>
+				<tbody>
+					<tr>
+						<td rowspan="3" style="white-space: nowrap;">
+							<select id="from-lang" class="lang-select"></select> &rarr; <select id="to-lang" class="lang-select"></select>
+						</td>
+						<td><label for="model">Model</label></td>
+						<td><input id="model" type="file"></td>
+						<td rowspan="3"><button id="upload-model">Add</button></td>
+					</tr>
+					<tr>
+						<td><label for="lex">Lex</label></td>
+						<td><input id="lex" type="file"></td>
+					</tr>
+					<tr>
+						<td><label for="vocabs">Vocabularies</label></td>
+						<td><input id="vocabs" type="file" multiple></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<script src="settings-dom-data.js"></script>
+		<script src="settings-handlers.js"></script>
+	</body>
+</html>

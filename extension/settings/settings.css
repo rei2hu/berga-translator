@@ -2,23 +2,35 @@ body {
 	margin: 10px;
 }
 
-header {
-	margin-bottom: 5px;
+#log {
+	color: red;
+	font-weight: 600;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
 }
 
-button[disabled]::after {
+article {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+tbody[id^=added]:empty::after, button[disabled]::after {
 	animation: rotate 2s linear infinite;
 	border: solid gray 1px;
 	border-bottom: 0;
 	border-radius: 50%;
 	display: inline-block;
-	margin-left: 10px;
-	position: absolute;
 	content: "";
 	width: 16px;
 	height: 16px;
 	margin-left: 16px;
 	vertical-align: middle;
+}
+
+button[disabled]::after {
+	position: absolute;
 }
 
 @keyframes rotate {

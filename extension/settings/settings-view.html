@@ -9,34 +9,38 @@
 	</head>
 	<body>
 		<div id="log"></div>
-		<section>
-			<button id="open-settings">Open Settings</button>
-		</section>
+		<header style="position: relative;">
+			<div><img style="margin: 0;" src="/berga.png"></img></div>
+			<div style="position: absolute; right: 0px; bottom: 0px;">
+				<button id="open-settings">Settings</button>
+				<button id="reset-settings">Reset Settings</button>
+			</div>
+		</header>
 		<hr>
-		<section>
-			<h1>Languages:</h1>
-			<table>
-				<tr>
-					<th>Identifier</th>
-					<th>Name</th>
-				</tr>
-				<tbody id="added-languages">
-				</tbody>
-			</table>
-		</section>
-		<hr>
-		<section>
-			<h1>Models:</h1>
-			<table>
-				<tr>
-					<th>Identifier</th>
-					<th>File</th>
-					<th>Size</th>
-				</tr>
-				<tbody id="added-models">
-				</tbody>
-			</table>
-		</section>
-		<script src="settings.js"></script>
+		<article>
+			<section>
+				<h6>Models:</h6>
+				<table>
+					<tr>
+						<th>Identifier</th>
+						<th>File</th>
+						<th>Size</th>
+					</tr>
+					<tbody id="added-models"></tbody>
+				</table>
+			</section>
+			<section>
+				<h6>Languages:</h6>
+				<table>
+					<tr>
+						<th>Identifier</th>
+						<th>Name</th>
+					</tr>
+					<tbody id="added-languages"></tbody>
+				</table>
+			</section>
+		</article>
+		<script src="settings-dom-data.js"></script>
+		<script src="settings-handlers.js"></script>
 	</body>
 </html>
