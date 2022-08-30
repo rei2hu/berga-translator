@@ -12,11 +12,11 @@
 	"background": {
 		"persistent": true,
 		"scripts": [
-			"extension/background.js",
-			"extension/settings/settings-background.js",
 			"extension/detection/fasttext_wasm.js",
 			"extension/detection/fasttext.js",
-			"extension/translation/bergamot-translator-worker.js"
+			"extension/translation/bergamot-translator-worker.js",
+			"extension/background.js",
+			"extension/settings/settings-background.js"
 		]
 	},
 	"content_scripts": [{
