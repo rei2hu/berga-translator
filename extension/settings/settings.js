@@ -38,13 +38,11 @@
 			const row = document.createElement("tr");
 			const cell1 = document.createElement("td");
 			const cell2 = document.createElement("td");
-			const cell3 = document.createElement("td"); // TODO: remove row button
 
 			cell1.innerText = value;
 			cell2.innerText = text;
 			row.appendChild(cell1);
 			row.appendChild(cell2);
-			row.appendChild(cell3);
 			addedLanguages.appendChild(row);
 		}
 

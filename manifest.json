@@ -8,7 +8,7 @@
 	"icons": {
 		"16": "berga.png"
 	},
-	"permissions": ["contextMenus", "activeTab", "storage", "unlimitedStorage"],
+	"permissions": ["contextMenus", "storage", "unlimitedStorage"],
 	"background": {
 		"persistent": true,
 		"scripts": [
