@@ -88,7 +88,8 @@
 		}
 	}
 
-	document.getElementById("upload-model")?.addEventListener("click", () => {
+	const uploadModelButton = document.getElementById("upload-model");
+	uploadModelButton?.addEventListener("click", () => {
 		const model = document.getElementById("model").files[0];
 		const lex = document.getElementById("lex").files[0];
 		const vocabs = document.getElementById("vocabs").files;
@@ -115,6 +116,7 @@
 			vocabsArr.push(vocabs[i]);
 		}
 
+		uploadModelButton.disabled = true;
 		Promise.all([model.arrayBuffer(), lex.arrayBuffer(), ...vocabsArr.map(vocab => vocab.arrayBuffer())])
 			// storing as top level so we don't have to override/copy any previous uploads
 			// probably expensive to do so but I didn't check
@@ -126,10 +128,12 @@
 						vocabs,
 					},
 				}))
-			.catch(e => logMessage(e.message));
+			.catch(e => logMessage(e.message))
+			.finally(() => uploadModelButton.disabled = false);
 	});
 
-	document.getElementById("add-language")?.addEventListener("click", () => {
+	const addLanguageButton = document.getElementById("add-language");
+	addLanguageButton?.addEventListener("click", () => {
 		const langId = document.getElementById("language-id").value;
 		const langName = document.getElementById("language-name").value;
 
@@ -143,15 +147,17 @@
 			return;
 		}
 
+		addLanguageButton.disabled = true;
 		browser.storage.local.get("languages")
 			.then(currentLanguages =>
 				browser.storage.local.set({
 					languages: {
-						...(currentLanguages || {}),
+						...(currentLanguages.languages || {}),
 						[langId]: langName,
 					}
 				})
-			).catch(e => logMessage(e.message));
+			).catch(e => logMessage(e.message))
+			.finally(() => addLanguageButton.disabled = false);
 	});
 
 	document.getElementById("reset")?.addEventListener("click", () => {

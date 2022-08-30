@@ -6,8 +6,27 @@ header {
 	margin-bottom: 5px;
 }
 
-@media (prefers-color-scheme: dark) {
-	html {
-		/* filter: invert(0.9) saturate(0) grayscale(0.5); */
+button[disabled]::after {
+	animation: rotate 2s linear infinite;
+	border: solid gray 1px;
+	border-bottom: 0;
+	border-radius: 50%;
+	display: inline-block;
+	margin-left: 10px;
+	position: absolute;
+	content: "";
+	width: 16px;
+	height: 16px;
+	margin-left: 16px;
+	vertical-align: middle;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg)
+	}
+	100% {
+		transform: rotate(360deg)
 	}
 }
+
