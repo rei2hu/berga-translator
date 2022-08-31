@@ -12,7 +12,8 @@ extension:
 2. This extension lets you change what languages to translate between
     - The official extension does not let you change the language and only works if it initially, properly detects a page's language
 3. This extension allows you to upload and save models to it
-    - The official extension downloads the models off Google Cloud (I think) each time it needs it.
+    - The official extension downloads the models off Google Cloud (I think) and then caches the result - not sure how it invalidates it.
+      Also requires an update to be able to download updated/new models most likely.
 
 ## Permissions:
 - contextMenus: for the Translate Selection option
