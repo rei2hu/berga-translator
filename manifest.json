@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "berga-translator",
 	"author": "r",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Client-sided text translator powered by The Bergamot Project",
 	"homepage_url": "https://github.com/rei2hu/berga-translator",
 	"icons": {
