@@ -1,5 +1,6 @@
 .berga-popup_style-reset, .berga-popup_style-reset * {
 	all: revert;
+	z-index: 2147483647;
 }
 
 .berga-popup {
